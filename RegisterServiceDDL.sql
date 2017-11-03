@@ -3,7 +3,9 @@ CREATE EXTENSION "uuid-ossp";
 CREATE TABLE product (
   id uuid NOT NULL,
   lookupcode character varying(32) NOT NULL DEFAULT(''),
-  count int NOT NULL DEFAULT(0),
+  quantity int NOT NULL DEFAULT(0),
+  price int NOT NULL DEFAULT(0),
+  active boolean NOT NULL DEFAULT(false),
   createdon timestamp without time zone NOT NULL DEFAULT now(),
   CONSTRAINT product_pkey PRIMARY KEY (id)
 ) WITH (
@@ -42,7 +44,7 @@ CREATE TABLE employee (
   firstname character varying(128) NOT NULL DEFAULT(''),
   lastname character varying(128) NOT NULL DEFAULT(''),
   password character varying(512) NOT NULL DEFAULT(''),
-  active boolean NOT NULL DEFAULT(FALSE), 
+  active boolean NOT NULL DEFAULT(FALSE),
   classification int NOT NULL DEFAULT(0),
   managerid uuid NOT NULL,
   createdon timestamp without time zone NOT NULL DEFAULT now(),
@@ -54,4 +56,3 @@ CREATE TABLE employee (
 CREATE INDEX ix_employee_employeeid
   ON employee
   USING hash(employeeid);
-
