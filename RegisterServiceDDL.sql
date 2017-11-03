@@ -56,3 +56,18 @@ CREATE TABLE employee (
 CREATE INDEX ix_employee_employeeid
   ON employee
   USING hash(employeeid);
+
+CREATE TABLE Transaction (
+  id uuid NOT NULL;
+  RecordId character varying(32) NOT NULL DEFAULT(''),
+  CashierId character varying(32) NOT NULL DEFAULT(''),
+  TransactionTotal int NOT NULL DEFAULT(0),
+  TransactionType character(6), CHECK((TransactionType='sale') OR (TransactionType='return')),
+  ReferenceId int NOT NULL DEFAULT(0)
+) WITH (
+  OIDS=FALSE
+);
+ 
+CREATE INDEX ix_Transaction_RecordId
+  ON Transaction
+  USING hash(RecordId);
