@@ -58,12 +58,13 @@ CREATE INDEX ix_employee_employeeid
   USING hash(employeeid);
 
 CREATE TABLE Transaction (
-  id uuid NOT NULL;
+  id uuid NOT NULL,
   RecordId character varying(32) NOT NULL DEFAULT(''),
   CashierId character varying(32) NOT NULL DEFAULT(''),
   TransactionTotal int NOT NULL DEFAULT(0),
   TransactionType character(6), CHECK((TransactionType='sale') OR (TransactionType='return')),
-  ReferenceId int NOT NULL DEFAULT(0)
+  ReferenceId int NOT NULL DEFAULT(0),
+  CreatedOn Date
 ) WITH (
   OIDS=FALSE
 );
@@ -71,3 +72,16 @@ CREATE TABLE Transaction (
 CREATE INDEX ix_Transaction_RecordId
   ON Transaction
   USING hash(RecordId);
+  
+CREATE TABLE TransactionEntry (
+  id uuid NOT NULL,
+  ItemName character varying(32) NOT NULL DEFAULT(''),
+  Amount int NOT NULL DEFAULT(0),
+  Price int NOT NULL DEFAULT(0)
+) WITH (
+  OIDS=FALSE
+);
+
+CREATE INDEX ix_TransactionEntry_ItemName
+  ON Transaction
+  USING hast(ItemName);
