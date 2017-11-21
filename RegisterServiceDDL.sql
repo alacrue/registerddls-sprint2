@@ -68,11 +68,11 @@ CREATE TABLE Transaction (
 ) WITH (
   OIDS=FALSE
 );
- 
+
 CREATE INDEX ix_Transaction_RecordId
   ON Transaction
   USING hash(RecordId);
-  
+
 CREATE TABLE TransactionEntry (
   id uuid NOT NULL,
   ItemName character varying(32) NOT NULL DEFAULT(''),
@@ -84,4 +84,4 @@ CREATE TABLE TransactionEntry (
 
 CREATE INDEX ix_TransactionEntry_ItemName
   ON Transaction
-  USING hast(ItemName);
+  USING hash(ItemName);
