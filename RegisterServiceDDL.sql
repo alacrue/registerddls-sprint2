@@ -75,6 +75,7 @@ CREATE INDEX ix_Transaction_RecordId
 
 CREATE TABLE TransactionEntry (
   id uuid NOT NULL,
+  ItemName character varying(32) NOT NULL DEFAULT(' '),
   detail character varying(128) NOT NULL DEFAULT(' ')
 ) WITH (
   OIDS=FALSE
